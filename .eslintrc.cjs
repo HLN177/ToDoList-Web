@@ -5,8 +5,8 @@ module.exports = {
   "root": true,
   "extends": [
     "plugin:vue/essential",
-    "eslint:recommended",
-    "@vue/eslint-config-prettier"
+    "eslint:recommended"
+    // "@vue/eslint-config-prettier"
   ],
   "overrides": [
     {
