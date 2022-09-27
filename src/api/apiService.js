@@ -1,5 +1,7 @@
 import service from "./axios";
 
+const LIST_PARAMS = ['status', 'name', 'sortBy', 'isAsc'];
+
 const URL = {
   TASK: '/api/task',
   TASK_BY_ID: '/api/task/<id>',
@@ -14,8 +16,21 @@ const apiService = {
     const url = URL.TASK;
     return service.post(url, data);
   },
-  getTaskList() {
-    const url = URL.TASK;
+  getTaskList(params = {}) {
+    const paramsArr = Object.entries(params);
+    let url = URL.TASK;
+    if (paramsArr.length) {
+      const strArr = []
+      for(let [k, v] of paramsArr) {
+        if (LIST_PARAMS.indexOf(k) !== -1) {
+          strArr.push(`${k}=${v}`);
+        }
+      }
+      if (strArr.length) {
+        const paramStr = strArr.join('&');
+        url = `${url}?${paramStr}`;
+      }
+    }
     return service.get(url);
   },
   getTask(id) {
