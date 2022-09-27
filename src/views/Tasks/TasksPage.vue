@@ -30,6 +30,9 @@
         label="Task Name"
         prop="TaskName"
       >
+        <template slot-scope="scope">
+          <el-button type="text" @click="toEditPage(scope.row._id)">{{scope.row.TaskName}}</el-button>
+        </template>
       </el-table-column>
       <el-table-column
         label="Start Date"
@@ -48,7 +51,7 @@
       </el-table-column>
       <el-table-column label="Operation">
         <template slot-scope="scope">
-          <el-button @click="handleDelete(scope.row)" type="text" size="small">Delete</el-button>
+          <el-button size="mini" @click="handleDelete(scope.row._id)">Delete</el-button>
           <!-- <el-button type="text" size="small">编辑</el-button> -->
         </template>
       </el-table-column>
@@ -73,9 +76,9 @@ export default {
     };
   },
   computed: {
-    disableDelete() {
-      return !this.selectedTask.length;
-    }
+    // disableDelete() {
+    //   return !this.selectedTask.length;
+    // }
   },
   watch: {
     
@@ -94,8 +97,10 @@ export default {
     toAddPage() {
       this.$router.push({name: 'tasksConfig'});
     },
-    async handleDelete(row) {
-      const {_id: id} = row;
+    toEditPage(id) {
+      this.$router.push({name: 'tasksConfig', query: {taskId: id}});
+    },
+    async handleDelete(id) {
       await apiService.deleteTask(id);
       this.$message({
         message: 'Delete Success',

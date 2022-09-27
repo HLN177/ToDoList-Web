@@ -18,6 +18,10 @@ const apiService = {
     const url = URL.TASK;
     return service.get(url);
   },
+  getTask(id) {
+    const url = URL.TASK_BY_ID.replace('<id>', id)
+    return service.get(url);
+  },
   updateTask(id, data) {
     const url = URL.TASK_BY_ID.replace('<id>', id)
     return service.put(url, data);
