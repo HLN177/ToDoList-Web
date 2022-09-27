@@ -32,16 +32,6 @@ export default {
       menuItems
     };
   },
-  computed: {
-  },
-  watch: {
-    
-  },
-  mounted() {
-  },
-  beforeDestroy() {
-
-  },
   methods: {
   }
 };

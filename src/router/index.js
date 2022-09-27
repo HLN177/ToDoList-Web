@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
 const DashboardView = () => import('../views/DashboardView.vue');
+const TasksPage = () => import('../views/Tasks/TasksPage.vue');
+const TasksConfig = () => import('../views/Tasks/TasksConfig.vue');
+const ProjectsPage = () => import('../views/Projects/ProjectsPage.vue');
 
 Vue.use(VueRouter)
 
@@ -12,27 +14,26 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'dashboard',
-      // redirect: '/test',
-      component: DashboardView
+      redirect: '/tasks',
+      component: DashboardView,
+      children: [
+        {
+          path: 'tasks',
+          name: 'tasks',
+          component: TasksPage
+        },
+        {
+          path: 'tasksConfig',
+          name: 'tasksConfig',
+          component: TasksConfig
+        },
+        {
+          path: 'projects',
+          name: 'projects',
+          component: ProjectsPage
+        }
+      ]
     }
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: HomeView
-    // },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // },
-    // {
-    //   path: '/test',
-    //   name: 'test',
-    //   component: () => import('../components/TestPage.vue')
-    // }
   ]
 })
 
